@@ -1,3 +1,5 @@
+# https://github.com/appropriate/docker-jetty
+
 mkdir -p ~/docker-build/jetty/; cd ~/docker-build/jetty/;
 
 wget https://raw.githubusercontent.com/iwangxiaodong/container-config/master/jetty/Dockerfile
