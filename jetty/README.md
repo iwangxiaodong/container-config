@@ -2,7 +2,7 @@
 
 - ENV JETTY_VERSION 9.4.8.v20171121
 
-- --add-to-start="...,cdi2,plus" --approve-all-licenses \
+- --add-to-start="...,cdi2" --approve-all-licenses \
 
 <br />
 
@@ -21,3 +21,8 @@ sudo chmod +x *
 sudo docker build -t my-jetty .  # 若传docker仓库则 docker build -t localhost:55000/jetty .
 
 sudo docker run -d -p 8088:8080 my-jetty  # curl http://localhost:8088
+
+<br />
+
+[若运行时修改jetty模块则要删除jetty.start并重启生效] sudo docker exec -it java-web-edu sh -c "rm jetty.start"
+
