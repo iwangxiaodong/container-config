@@ -1,4 +1,12 @@
-# https://github.com/appropriate/docker-jetty
+基于 https://github.com/appropriate/docker-jetty 修改：
+
+- ENV JETTY_VERSION 9.4.8.v20171121
+
+- --add-to-start="...,cdi2,jndi" --approve-all-licenses \
+
+<br />
+
+Usages：
 
 mkdir -p ~/docker-build/jetty/; cd ~/docker-build/jetty/;
 
