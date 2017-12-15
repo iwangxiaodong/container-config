@@ -2,7 +2,7 @@
 
 - ENV JETTY_VERSION 9.4.8.v20171121
 
-- --add-to-start="...,cdi2,jndi" --approve-all-licenses \
+- --add-to-start="...,cdi2,plus" --approve-all-licenses \
 
 <br />
 
