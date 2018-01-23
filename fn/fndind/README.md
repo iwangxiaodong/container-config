@@ -1,6 +1,6 @@
 Usages：
 
-mkdir -p ~/build-images/jetty/; cd ~/build-images/jetty/;
+mkdir -p ~/build-images/fndind/; cd ~/build-images/fndind/;
 
 wget https://raw.githubusercontent.com/iwangxiaodong/container-config/master/fn/fndind/Dockerfile
 
