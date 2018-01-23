@@ -1,4 +1,4 @@
-FROM openjdk:9-jre
+FROM openjdk:9-slim
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r jetty && useradd -r -g jetty jetty
@@ -44,10 +44,11 @@ RUN set -xe \
 	&& rm -rf /tmp/hsperfdata_root
 
 ENV JETTY_BASE /var/lib/jetty
-RUN mkdir -p "$JETTY_BASE"
+RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 WORKDIR $JETTY_BASE
 
 RUN set -xe \
+	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar" -o lib/ext/jndi/mariadb-java-client-2.2.1.jar
 	&& java -jar "$JETTY_HOME/start.jar" --create-startd --add-to-start="server,http,deploy,jsp,jstl,ext,resources,websocket,cdi2" --approve-all-licenses \
 	&& chown -R jetty:jetty "$JETTY_BASE" \
 	&& rm -rf /tmp/hsperfdata_root
