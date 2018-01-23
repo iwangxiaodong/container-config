@@ -10,7 +10,7 @@
 	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar" -o lib/ext/jndi/mariadb-java-client-2.2.1.jar \
 	
 - 若为FROM openjdk:9-slim 还需增加：
-RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg libfontconfig1 && rm -rf /var/lib/apt/lists/*
 
 
 <br />
