@@ -7,7 +7,6 @@
 - RUN mkdir -p "$JETTY_BASE" 改为 RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 
 - java -jar...前增加：
-RUN set -xe \
 	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar" -o lib/ext/jndi/mariadb-java-client-2.2.1.jar
 
 
