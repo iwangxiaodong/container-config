@@ -31,7 +31,7 @@ ENV JETTY_GPG_KEYS \
 	5C9579B3DB2E506429319AAEF33B071B29559E1E
 	
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		curl gnupg \
+		curl gnupg libfontconfig1 \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -xe \
