@@ -8,7 +8,7 @@
 
 Usages：
 
-mkdir -p ~/docker-build/jetty/; cd ~/docker-build/jetty/;
+mkdir -p ~/build-images/jetty/; cd ~/build-images/jetty/;
 
 wget https://raw.githubusercontent.com/iwangxiaodong/container-config/master/jetty/Dockerfile
 
@@ -18,9 +18,9 @@ wget https://raw.githubusercontent.com/appropriate/docker-jetty/master/9.4-jre8/
 
 sudo chmod +x *
 
-sudo docker build -t my-jetty .  # 若传docker仓库则 docker build -t localhost:55000/jetty .
+sudo docker build -t jetty-image .  # 若传docker仓库则 docker build -t localhost:55000/jetty .
 
-sudo docker run -d -p 8088:8080 my-jetty  # curl http://localhost:8088
+sudo docker run -d -p 8088:8080 jetty-image  # curl http://localhost:8088
 
 <br />
 
