@@ -29,6 +29,10 @@ ENV JETTY_GPG_KEYS \
 	FBA2B18D238AB852DF95745C76157BDF03D0DCD6 \
 	# Greg Wilkins    <gregw@webtide.com>
 	5C9579B3DB2E506429319AAEF33B071B29559E1E
+	
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		curl gnupg \
+	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -xe \
 	&& curl -SL "$JETTY_TGZ_URL" -o jetty.tar.gz \
