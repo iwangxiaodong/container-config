@@ -8,7 +8,7 @@ wget https://raw.githubusercontent.com/docker-library/docker/master/18.02/dind/d
 
 chmod 777 dockerd-entrypoint.sh
 
-vim Dockerfile  # 添加到COPY ...前
+vim Dockerfile  # 添加到COPY ...前； 开头修改为FROM docker:18.01
 
 - RUN wget https://github.com/fnproject/cli/releases/download/0.4.45/fn_alpine -O /usr/local/bin/fn
 
