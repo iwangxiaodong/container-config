@@ -27,7 +27,11 @@ wget https://raw.githubusercontent.com/appropriate/docker-jetty/master/9.4-jre8/
 
 sudo chmod +x *
 
-sudo docker build -t my-jetty .  # 若传docker仓库则 docker build -t localhost:55000/jetty .
+sudo docker build -t my-jetty .  
+# 若传docker仓库则 
+  sudo docker build -t localhost:30500/cr/all/my-jetty .
+  
+  sudo docker push localhost:30500/cr/all/my-jetty
 
 sudo docker run -d -p 8088:8080 my-jetty  # curl http://localhost:8088
 
