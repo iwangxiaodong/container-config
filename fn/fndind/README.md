@@ -17,6 +17,13 @@ vim Dockerfile  # 添加到COPY ...前
 - WORKDIR /app/data
 
 sudo docker build -t my-fndind . 
+
+# 注意 - 需要-d参数
+
+sudo docker run --privileged --name my-fndind -d localhost:30500/cr/all/my-fndind
+
+sudo docker exec -it my-fndind sh -c 'docker version'
+
 # 若传docker仓库则 
   sudo docker build -t localhost:30500/cr/all/my-fndind .
   
