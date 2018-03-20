@@ -8,7 +8,7 @@ ENV PATH $JETTY_HOME/bin:$PATH
 RUN mkdir -p "$JETTY_HOME"
 WORKDIR $JETTY_HOME
 
-ENV JETTY_VERSION 9.4.8.v20171121
+ENV JETTY_VERSION 9.4.9.v20180320
 ENV JETTY_TGZ_URL https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz
 
 # GPG Keys are personal keys of Jetty committers (see https://github.com/eclipse/jetty.project/blob/0607c0e66e44b9c12a62b85551da3a0edce0281e/KEYS.txt)
@@ -52,7 +52,7 @@ RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 WORKDIR $JETTY_BASE
 
 RUN set -xe \
-	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.2/mariadb-java-client-2.2.2.jar" -o lib/ext/jndi/mariadb-java-client.jar \
+	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.3/mariadb-java-client-2.2.3.jar" -o lib/ext/jndi/mariadb-java-client.jar \
 	&& java -jar "$JETTY_HOME/start.jar" --create-startd --add-to-start="server,http,deploy,jsp,jstl,ext,resources,websocket,cdi2" --approve-all-licenses \
 	&& chown -R jetty:jetty "$JETTY_BASE" \
 	&& rm -rf /tmp/hsperfdata_root
