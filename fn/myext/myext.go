@@ -27,6 +27,7 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("My ext - ", time.Now())
 
+			ctx := r.Context()
 			authorizationHeader := r.Header.Get("Authorization")
 			if authorizationHeader == "" {
 				server.WriteError(ctx, w, http.StatusUnauthorized, errors.New("No Authorization header, access denied"))
