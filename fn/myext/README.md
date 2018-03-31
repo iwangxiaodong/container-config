@@ -7,7 +7,9 @@
 extensions:
   - name: github.com/iwangxiaodong/container-config/fn/myext
 ```
-  
+
+    curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
+
     fn build-server -t cr.openle.com/my/fn-server-with-ext:v1.0.0
     
     docker push cr.openle.com/my/fn-server-with-ext:v1.0.0
