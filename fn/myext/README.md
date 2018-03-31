@@ -1,17 +1,16 @@
 
 构建包括扩展的Fn Server镜像：
-    
-    vim ext.yaml
-
-```yaml
-extensions:
-  - name: github.com/iwangxiaodong/container-config/fn/myext
-```
 
     curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
 
-    fn build-server -t cr.openle.com/my/fn-server-with-ext:v1.0.0
+    mkdir my-fn-ext; cd my-fn-ext
     
-    docker push cr.openle.com/my/fn-server-with-ext:v1.0.0
+    curl https://raw.githubusercontent.com/iwangxiaodong/container-config/master/fn/myext/ext.yaml
+   
+    fn build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0
     
-    kubectl set image deployment/my-fns my-fns-p=cr.openle.com/my/fn-server-with-ext:v1.0.0
+    gcloud auth configure-docker
+        
+    docker push gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0
+    
+    kubectl set image deployment/my-fns my-fns-p=gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0
