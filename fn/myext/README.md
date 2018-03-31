@@ -7,7 +7,7 @@
     
     wget https://raw.githubusercontent.com/iwangxiaodong/container-config/master/fn/myext/ext.yaml
    
-    fn build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0
+    fn --verbose build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0
     
     gcloud auth configure-docker
         
