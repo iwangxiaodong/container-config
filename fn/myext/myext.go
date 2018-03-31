@@ -21,6 +21,7 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
         s.AddAPIMiddlewareFunc(func(next http.Handler) http.Handler {
             return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
                 fmt.Println("My ext - ", time.Now())
+                next.ServeHTTP(w, r)
             })
         })
         return nil
