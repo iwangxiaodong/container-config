@@ -1,13 +1,14 @@
     package myext
     import (
         "fmt"
-	    "time"
+	"net/http"
+	"time"
         "github.com/fnproject/fn/api/server"
         "github.com/fnproject/fn/fnext"
     )
     func init() {
         server.RegisterExtension(&fnext.Extension{
-            Name:  "github.com/iwangxiaodong/container-config/fn/my-ext", // Should be the import name
+            Name:  "github.com/iwangxiaodong/container-config/fn/myext", // Should be the import name
             Setup: setup, // Fn will call this during startup
         })
     }
