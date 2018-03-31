@@ -7,12 +7,17 @@
         "github.com/fnproject/fn/fnext"
     )
     func init() {
-        server.RegisterExtension(fnext.Extension{
-            Name:  "github.com/iwangxiaodong/container-config/fn/myext", // Should be the import name
-            Setup: setup, // Fn will call this during startup
-        })
+        server.RegisterExtension(&myExt{})
     }
-    func setup(s fnext.ExtServer) error {
+
+type myExt struct {
+}
+
+func (e *myExt) Name() string {
+	return "github.com/iwangxiaodong/container-config/fn/myext"
+}
+
+func (e *myExt) Setup(s fnext.ExtServer) error {
         s.AddAPIMiddlewareFunc(func(next http.Handler) http.Handler {
             return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
                 fmt.Println("My ext - ", time.Now())
