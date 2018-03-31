@@ -9,3 +9,5 @@ extensions:
 ```
   
     fn build-server -t cr.openle.com/my/fn-server-with-ext
+    
+    docker push cr.openle.com/my/fn-server-with-ext
