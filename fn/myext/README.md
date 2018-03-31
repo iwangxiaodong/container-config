@@ -8,6 +8,6 @@ extensions:
   - name: github.com/iwangxiaodong/container-config/fn/myext
 ```
   
-    fn build-server -t cr.openle.com/my/fn-server-with-ext
+    fn build-server -t cr.openle.com/my/fn-server-with-ext:v1.0.0
     
-    docker push cr.openle.com/my/fn-server-with-ext
+    docker push cr.openle.com/my/fn-server-with-ext:v1.0.0
