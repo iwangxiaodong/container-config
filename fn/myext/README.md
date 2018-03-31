@@ -7,7 +7,7 @@
 
 ```yaml
 extensions:
-  - name: github.com/iwangxiaodong/container-config/fn/my-ext
+  - name: github.com/iwangxiaodong/container-config/master/fn/myext
 ```
   
     fn build-server -t cr.openle.com/my/fn-server-with-ext
