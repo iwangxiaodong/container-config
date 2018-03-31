@@ -7,7 +7,7 @@
         "github.com/fnproject/fn/fnext"
     )
     func init() {
-        server.RegisterExtension(&fnext.Extension{
+        server.RegisterExtension(fnext.Extension{
             Name:  "github.com/iwangxiaodong/container-config/fn/myext", // Should be the import name
             Setup: setup, // Fn will call this during startup
         })
