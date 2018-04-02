@@ -24,9 +24,10 @@ func (e *myExt) Name() string {
 }
 
 func (e *myExt) Setup(s fnext.ExtServer) error {
+	now := time.Now()
 	s.AddAPIMiddlewareFunc(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			fmt.Println("My ext AddAPIMiddlewareFunc - ", time.Now())
+			fmt.Println("My ext AddAPIMiddlewareFunc - ", now)
 
 			ctx := r.Context()
 			authorizationHeader := r.Header.Get("Authorization")
@@ -40,18 +41,15 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 				server.WriteError(ctx, w, http.StatusUnauthorized, errors.New("Invalid authorization header, access denied"))
 				return
 			}
-
-			// if ahSplit[1] != "token13572468" {
-			// 	server.WriteError(ctx, w, http.StatusUnauthorized, errors.New("Invalid authorization token, access denied"))
-			// 	return
-			// }
-
+			
 			idToken := ahSplit[1]
-			fmt.Println("idToken - " + idToken)
-
-			// 后续从数据库获取用户TokenSecret
-			var jwtSecret = "92d75b10-358d-11e8-a6fc-0a580a340088"
-
+			
+			var jwtSecret = os.Getenv("ALL_JWT_SECRET")
+			// var ownJWTSecret = os.Getenv("OWN_JWT_SECRET")
+			// var myJWTSecret = "92d75b10-358d-11e8-a6fc-0a580a340088"
+			
+			fmt.Println("idToken - " + idToken+"|jwtSecret - " + jwtSecret)
+			
 			jwtToken, err := jwt.Parse(idToken, func(jt *jwt.Token) (interface{}, error) {
 				if _, ok := jt.Method.(*jwt.SigningMethodHMAC); !ok {
 					return nil, fmt.Errorf("Unexpected signing method: %v", jt.Header["alg"])
@@ -95,7 +93,7 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 	s.AddRootMiddlewareFunc(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-			fmt.Println("My ext AddRootMiddlewareFunc - ", time.Now())
+			fmt.Println("My ext AddRootMiddlewareFunc - ", now)
 
 			next.ServeHTTP(w, r)
 		})
