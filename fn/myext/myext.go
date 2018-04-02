@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"os"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/fnproject/fn/api/server"
