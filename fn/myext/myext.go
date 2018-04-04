@@ -1,16 +1,18 @@
 package myext
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 	"time"
-	"os"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/fnproject/fn/api/server"
 	"github.com/fnproject/fn/fnext"
+	"github.com/fnproject/fn_go/models"
 )
 
 func init() {
@@ -25,10 +27,13 @@ func (e *myExt) Name() string {
 }
 
 func (e *myExt) Setup(s fnext.ExtServer) error {
+
+	s.AddCallListener(&myListener{})
+
 	now := time.Now()
 	s.AddAPIMiddlewareFunc(func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			fmt.Println("My ext AddAPIMiddlewareFunc - ", now)
+			fmt.Println("My ext AddAPIMiddlewareFunc - ", now, "|RequestURI - ", r.RequestURI)
 
 			ctx := r.Context()
 			authorizationHeader := r.Header.Get("Authorization")
@@ -42,15 +47,15 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 				server.WriteError(ctx, w, http.StatusUnauthorized, errors.New("Invalid authorization header, access denied"))
 				return
 			}
-			
+
 			idToken := ahSplit[1]
-			
+
 			var jwtSecret = os.Getenv("ALL_JWT_SECRET")
 			// var ownJWTSecret = os.Getenv("OWN_JWT_SECRET")
 			// var myJWTSecret = "92d75b10-358d-11e8-a6fc-0a580a340088"
-			
-			fmt.Println("idToken - " + idToken+"|jwtSecret - " + jwtSecret)
-			
+
+			fmt.Println("idToken - " + idToken + "|jwtSecret - " + jwtSecret)
+
 			jwtToken, err := jwt.Parse(idToken, func(jt *jwt.Token) (interface{}, error) {
 				if _, ok := jt.Method.(*jwt.SigningMethodHMAC); !ok {
 					return nil, fmt.Errorf("Unexpected signing method: %v", jt.Header["alg"])
@@ -83,7 +88,8 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 			if appNameV != nil {
 				appName := appNameV.(string)
 				fmt.Println("appName - " + appName)
-				if strings.Split(appName, "_-_")[0] != username {
+
+				if appName != "" && strings.Split(appName, "_-_")[0] != username {
 					w.WriteHeader(http.StatusUnauthorized)
 					fmt.Fprintf(w, errors.New("AppName isn't current username, access denied").Error())
 					return
@@ -104,5 +110,18 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 			next.ServeHTTP(w, r)
 		})
 	})
+	return nil
+}
+
+type myListener struct {
+}
+
+func (l *myListener) BeforeCall(ctx context.Context, call *models.Call) error {
+	fmt.Println("every time a function is called.")
+	return nil
+}
+
+func (l *myListener) AfterCall(ctx context.Context, call *models.Call) error {
+	fmt.Println("AFTER every time a function is called.")
 	return nil
 }
