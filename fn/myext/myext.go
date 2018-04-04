@@ -83,6 +83,11 @@ func (e *myExt) Setup(s fnext.ExtServer) error {
 			if appNameV != nil {
 				appName := appNameV.(string)
 				fmt.Println("appName - " + appName)
+				if strings.Split(appName, "_-_")[0] != username {
+					w.WriteHeader(http.StatusUnauthorized)
+					fmt.Fprintf(w, errors.New("AppName isn't current username, access denied").Error())
+					return
+				}
 			}
 
 			fmt.Println("My ext ServeHTTP - ", time.Now())
