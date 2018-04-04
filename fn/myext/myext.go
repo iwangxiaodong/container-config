@@ -12,7 +12,7 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/fnproject/fn/api/server"
 	"github.com/fnproject/fn/fnext"
-	"github.com/fnproject/fn_go/models"
+	"github.com/fnproject/fn/api/models"
 )
 
 func init() {
