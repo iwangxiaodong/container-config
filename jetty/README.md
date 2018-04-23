@@ -1,15 +1,15 @@
 基于 https://github.com/appropriate/docker-jetty 修改：
 
-- ENV JETTY_VERSION 9.4.8.v20171121
+- ENV JETTY_VERSION 9.4.9.v20180320
 
-- --add-to-start="...,cdi2" --approve-all-licenses \
+- --add-to-start="...,cdi2" --approve-all-licenses \  # 后续移除jsp和jstl
 
 - RUN mkdir -p "$JETTY_BASE" 改为 RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 
 - java -jar...前增加：
-	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar" -o lib/ext/jndi/mariadb-java-client-2.2.1.jar \
+	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar" -o lib/ext/jndi/mariadb-java-client-2.2.3.jar \
 	
-- 若为FROM openjdk:9-slim 还需增加：
+- 若为FROM openjdk:10-slim 还需增加：
 RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg libfontconfig1 && rm -rf /var/lib/apt/lists/*
 
 
