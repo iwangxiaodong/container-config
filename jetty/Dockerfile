@@ -8,11 +8,11 @@ ENV PATH $JETTY_HOME/bin:$PATH
 RUN mkdir -p "$JETTY_HOME"
 WORKDIR $JETTY_HOME
 
-ENV JETTY_VERSION 9.4.9.v20180320
+ENV JETTY_VERSION 9.4.10.v20180503
 ENV JETTY_TGZ_URL https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz
 	
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		curl libfontconfig1 \
+		curl libfontconfig1 iputils-ping \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -xe \
