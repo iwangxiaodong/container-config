@@ -12,7 +12,7 @@ ENV JETTY_VERSION 9.4.10.v20180503
 ENV JETTY_TGZ_URL https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz
 	
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		curl libfontconfig1 iputils-ping \
+		curl libfontconfig1 iputils-ping vim \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -xe \
