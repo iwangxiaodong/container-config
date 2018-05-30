@@ -12,7 +12,8 @@
 - 若为FROM openjdk:10-slim 还需增加：
 RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg libfontconfig1 && rm -rf /var/lib/apt/lists/*
 
-
+<br />
+注意：可选安装包 iputils-ping vim 仅为方便调试。
 <br />
 
 Usages：
