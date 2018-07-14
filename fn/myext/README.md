@@ -9,8 +9,10 @@
    
     sudo fn --verbose build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1
     
+    sudo su root
+    
     gcloud auth configure-docker
         
     docker push gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1
     
-    kubectl set image deployment/my-fns my-fns-p=gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1
+    kubectl set image deployment/my-fns fns=gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1 --namespace=all
