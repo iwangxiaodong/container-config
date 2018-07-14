@@ -7,7 +7,7 @@
     
     wget https://raw.githubusercontent.com/iwangxiaodong/container-config/master/fn/myext/ext.yaml
     
-    注意：由于是从源码构建，so只在官网构建状态为“成功”时构建
+    注意：由于是通过dep分析import package获取master源码，so只在官网构建状态为“PASSED”时创建Server
    
     sudo fn --verbose build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1
     
