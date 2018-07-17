@@ -20,3 +20,25 @@
     exit
     
     kubectl set image deployment/my-fns fns=gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1 --namespace=all
+
+
+【例外情况】：
+
+    若生成的tmp/main.go与fn项目不一致则以后者为准：
+    
+        https://raw.githubusercontent.com/fnproject/fn/master/cmd/fnserver/main.go
+        
+        删除重复导入：	_ "golang.org/x/net/trace"
+        
+                import _ "github.com/iwangxiaodong/container-config/fn/myext"
+        
+        [在funcServer.Start(ctx)上方增加]：
+        
+                funcServer.AddExtensionByName("github.com/iwangxiaodong/container-config/fn/myext")
+        
+        
+    sudo docker build -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1 .
+    
+    sudo gcloud auth configure-docker
+    
+    docker push gcr.io/$DEVSHELL_PROJECT_ID/fn-server-with-ext:1.0.0-b1
