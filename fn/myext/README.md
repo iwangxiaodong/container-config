@@ -9,13 +9,13 @@
     
     注意：由于是通过dep或go get分析import package获取master源码，so只在官网构建状态为“PASSED”时创建Server
    
-    sudo fn --verbose build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1
+    sudo fn --verbose build-server -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b$(date +%s)
     
     sudo su root
     
     gcloud auth configure-docker
         
-    docker push gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1
+    docker push gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b$(date +%s)
     
     exit
     
@@ -30,14 +30,14 @@
         
         删除重复导入：	_ "golang.org/x/net/trace"
         
-                import _ "github.com/iwangxiaodong/container-config/fn/myext"
+        导入扩展包：   import _ "github.com/iwangxiaodong/container-config/fn/myext"
         
         [在funcServer.Start(ctx)上方增加]：
         
                 funcServer.AddExtensionByName("github.com/iwangxiaodong/container-config/fn/myext")
         
         
-    sudo docker build -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b1 .
+    sudo docker build -t gcr.io/$GOOGLE_CLOUD_PROJECT/fn-server-with-ext:1.0.0-b$(date +%s) .
     
     sudo gcloud auth configure-docker
     
