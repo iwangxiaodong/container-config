@@ -1,4 +1,4 @@
-FROM openjdk:10-slim
+FROM openjdk:11-slim
 
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
 RUN groupadd -r jetty && useradd -r -g jetty jetty
@@ -8,11 +8,11 @@ ENV PATH $JETTY_HOME/bin:$PATH
 RUN mkdir -p "$JETTY_HOME"
 WORKDIR $JETTY_HOME
 
-ENV JETTY_VERSION 9.4.10.v20180503
+ENV JETTY_VERSION 9.4.12.v20180830
 ENV JETTY_TGZ_URL https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz
 	
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		curl libfontconfig1 iputils-ping vim \
+		curl libfontconfig1 iputils-ping vim.tiny \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -xe \
@@ -27,7 +27,7 @@ RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 WORKDIR $JETTY_BASE
 
 RUN set -xe \
-	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.3/mariadb-java-client-2.2.3.jar" -o lib/ext/jndi/mariadb-java-client.jar \
+	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.3.0/mariadb-java-client-2.3.0.jar" -o lib/ext/jndi/mariadb-java-client.jar \
 	&& curl -SL "http://central.maven.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar" -o lib/ext/javax.activation.jar \
 	&& java -jar "$JETTY_HOME/start.jar" --create-startd --add-to-start="server,http,deploy,jsp,jstl,ext,resources,websocket,cdi2" --approve-all-licenses \
 	&& chown -R jetty:jetty "$JETTY_BASE" \
