@@ -42,7 +42,9 @@ sudo docker run -d -p 8088:8080 my-jetty  # curl http://localhost:8088
 
 
 k8s添加Java选项示例：
+```yaml
         env:
         - name: JAVA_OPTIONS
           value: "-XX:+UnlockExperimentalVMOptions -XX:+Use..."
+```
 
