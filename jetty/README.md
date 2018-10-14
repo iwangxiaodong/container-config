@@ -7,7 +7,7 @@
 - RUN mkdir -p "$JETTY_BASE" 改为 RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 
 - java -jar...前增加：
-	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.2.1/mariadb-java-client-2.2.1.jar" -o lib/ext/jndi/mariadb-java-client-2.2.3.jar \
+	&& curl -SL "http://central.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/2.3.0/mariadb-java-client-2.3.0.jar" -o lib/ext/jndi/mariadb-java-client-2.3.0.jar \
 	
 - 若为FROM openjdk:10-slim 还需增加：
 RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg libfontconfig1 && rm -rf /var/lib/apt/lists/*
@@ -39,4 +39,10 @@ sudo docker run -d -p 8088:8080 my-jetty  # curl http://localhost:8088
 <br />
 
 [若运行时修改jetty模块则要删除jetty.start并重启生效] sudo docker exec -it java-web-edu sh -c "rm jetty.start"
+
+
+k8s添加Java选项示例：
+        env:
+        - name: JAVA_OPTIONS
+          value: "-XX:+UnlockExperimentalVMOptions -XX:+Use..."
 
