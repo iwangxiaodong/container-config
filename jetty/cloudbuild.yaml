@@ -1,4 +1,4 @@
-# gcloud container builds submit --config=cloudbuild.yaml .
+# gcloud builds submit --config=cloudbuild.yaml .
 # 不依赖Cloud Source Repositories
 steps:
 - name: 'gcr.io/cloud-builders/docker'
