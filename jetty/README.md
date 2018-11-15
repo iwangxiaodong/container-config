@@ -1,8 +1,8 @@
 基于 https://github.com/appropriate/docker-jetty 修改：
 
-- ENV JETTY_VERSION 9.4.9.v20180320
+- ENV JETTY_VERSION 9.4.13.v20181111
 
-- --add-to-start="...,cdi2" --approve-all-licenses \  # 后续移除jsp和jstl
+- --add-to-start="...,cdi2" --approve-all-licenses \  # 后续移除jsp和jstl; 若用到https可添加http2模块
 
 - RUN mkdir -p "$JETTY_BASE" 改为 RUN mkdir -p "$JETTY_BASE/lib/ext/jndi/"
 
